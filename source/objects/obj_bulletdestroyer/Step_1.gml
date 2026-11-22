@@ -1,0 +1,60 @@
+
+// what the fuck
+if destroyAll && destroy && !fix {
+	print("what the fuck??")
+	with obj_bullet {
+		mask_index = spr_nothing
+	}
+	fix = true;
+}
+
+currentSize = min(currentSize + sizeSpeed * global.delta_multi, targetSize);
+if (currentSize >= targetSize) {
+	if destroyAll && destroy instance_destroy(obj_bullet);
+	instance_destroy()
+}
+var list = ds_list_create()
+collision_circle_list(x, y, currentSize, obj_bullet, 0, 1, list, 0)
+for (var i = 0; i < ds_list_size(list); i++) {
+	var b = list[| i]
+	//var d = point_direction(x, y, b.x, b.y)
+	if hasTouched[$ b] == undefined {
+		if bulletBonus 
+			if false || ((0 < b.x && b.x < WIDTH) && (0 < b.y && b.y < HEIGHT + 32)) {
+				
+				with instance_create_layer(b.x, b.y, "Instances", obj_collectable) {
+					y_vel = -2
+					
+					if other.bulletCharge {
+						image_blend = #dd99ff
+						s_charge = true	
+					}
+				}
+				
+				text_splash_random(b.x, b.y, "100", 16, 10, 30);
+				global.score += 100;
+				
+			}
+		hasTouched[$ b] = 69;
+	}
+	if destroy {
+		
+		if b.object_index != obj_laser {
+			
+			particle_burst(b.x, b.y, ps_bulletfocuspop)
+			instance_destroy(b)
+			
+			
+		} else if !b.destroyFlag && point_distance(x, y, b.x, b.y) > currentSize + 16 {
+			b.endTime = 8;
+			b.life = 8
+			b.destroyFlag = true;
+		}
+		
+		
+	}
+	
+
+}
+ds_list_destroy(list)
+

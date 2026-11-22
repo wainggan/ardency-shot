@@ -1,0 +1,18 @@
+angle_vel = 
+	angle_target != undefined
+		? approach(angle_vel, angle_target, angle_accel * global.delta_multi)
+		: angle_vel + angle_accel * global.delta_multi;
+angle += angle_vel * global.delta_multi;
+
+event_inherited();
+
+if life != undefined {
+	if life < endTime mask_index = spr_nothing;
+}
+
+image_angle = angle;
+image_xscale = 32
+image_yscale = 1 - (fade < startTime ? fade/startTime : 1 - 1 / 16) - (life != undefined && life < endTime ? 1 - life / endTime : 0);
+//if fade - startTime > 0 && fade / fadeTime < 0.25 && fade % 8 < 4 image_yscale = 0;
+
+

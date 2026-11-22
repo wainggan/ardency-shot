@@ -1,0 +1,11 @@
+{
+  "$GMNotes":"v2",
+  "%Name":"nt_monk",
+  "name":"nt_monk",
+  "parent":{
+    "name":"ardency-shot",
+    "path":"ardency-shot.yyp",
+  },
+  "resourceType":"GMNotes",
+  "resourceVersion":"2.0",
+}

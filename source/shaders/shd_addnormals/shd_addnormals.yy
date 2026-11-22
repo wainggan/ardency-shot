@@ -1,0 +1,12 @@
+{
+  "$GMShader":"",
+  "%Name":"shd_addnormals",
+  "name":"shd_addnormals",
+  "parent":{
+    "name":"shaders",
+    "path":"folders/graphics/shaders.yy",
+  },
+  "resourceType":"GMShader",
+  "resourceVersion":"2.0",
+  "type":1,
+}

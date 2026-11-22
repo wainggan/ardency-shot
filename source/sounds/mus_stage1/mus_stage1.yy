@@ -1,0 +1,26 @@
+{
+  "$GMSound":"v2",
+  "%Name":"mus_stage1",
+  "audioGroupId":{
+    "name":"audiogroup_default",
+    "path":"audiogroups/audiogroup_default",
+  },
+  "bitDepth":1,
+  "channelFormat":1,
+  "compression":3,
+  "compressionQuality":3,
+  "conversionMode":0,
+  "duration":106.75324,
+  "exportDir":"",
+  "name":"mus_stage1",
+  "parent":{
+    "name":"music",
+    "path":"folders/sounds/music.yy",
+  },
+  "preload":false,
+  "resourceType":"GMSound",
+  "resourceVersion":"2.0",
+  "sampleRate":44100,
+  "soundFile":"mus_stage1.ogg",
+  "volume":1.0,
+}

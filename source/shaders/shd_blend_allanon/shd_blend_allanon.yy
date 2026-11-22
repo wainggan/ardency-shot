@@ -1,0 +1,12 @@
+{
+  "$GMShader":"",
+  "%Name":"shd_blend_allanon",
+  "name":"shd_blend_allanon",
+  "parent":{
+    "name":"blend",
+    "path":"folders/graphics/shaders/blend.yy",
+  },
+  "resourceType":"GMShader",
+  "resourceVersion":"2.0",
+  "type":1,
+}

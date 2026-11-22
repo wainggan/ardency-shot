@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_bullet_colors",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_bullet_colors",
+  "parent":{
+    "name":"bullet",
+    "path":"folders/objects/bullet.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

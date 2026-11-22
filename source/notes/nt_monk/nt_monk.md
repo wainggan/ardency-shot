@@ -1,0 +1,311 @@
+attacks = [
+	function(){
+		hp = 140;
+		scoreGive = 50000;
+		movement_start(WIDTH / 2, 50, 1/20)
+		command_set([
+			8,
+			8,
+			function(){
+				bullet_preset_ring(x, y, 54, 8, irandom_range(0, 359), function(_x, _y, _dir){
+					bullet_shoot_dir2(_x, _y, 12, 0.3, 3, _dir + random_range(-1, 1));
+				})
+				commandIndex--;
+			}
+		]);
+	},
+	function(){
+		hp = 220;
+		scoreGive = 100000;
+		angle = 0;
+		count = 0;
+		dir = 1;
+		command_set([
+			function() {
+				movement_start(clamp(obj_player.x, 96, WIDTH - 96) + irandom_range(-64, 64), irandom_range(40, 100), 1/40);
+			},
+			50,
+			function(){
+				movement_start(x + irandom_range(-48, 48), y + irandom_range(-32, 32), 1/40, "linear");
+			},
+			1,
+			function(){
+				bullet_preset_ring(x, y, 13, 8, angle, function(_x, _y, _dir){
+					with bullet_shoot_dir2(_x, _y, 8, 0.12, 2, _dir) {
+						sprite_index = spr_bullet_small;
+					}
+				});
+				angle += 4 * dir;
+				count += 1;
+				if count < 40
+					commandIndex--;
+				else {
+					count = 0;
+					commandIndex = 0;
+					angle = irandom_range(0, 180)
+					dir *= -1;
+					bullet_preset_plate(x, y, 9, 8, 16, 0, point_direction(x, y, obj_player.x, obj_player.y), function(_x, _y, _dir){
+						bullet_shoot_dir2(_x, _y, 4, 0.1, 1, _dir).glow = cb_green;
+					})
+				}
+			}
+		])
+	},
+	function(){
+		hp = 190;
+		scoreGive = 200000;
+		movement_start(WIDTH / 2, HEIGHT / 4, 1 / 20);
+		command_set([
+			9, 
+			function(){
+				bullet_shoot_dir2(irandom_range(16, WIDTH-16), -32, 12, 0.2, 4, 270, 1).sprite_index = spr_bullet_large;
+				commandIndex--;
+			}
+		]);
+		count = 0;
+		angle = 0;
+		command_add([
+			20,
+			function(){
+				movement_start(clamp(obj_player.x, 96, WIDTH - 96) + irandom_range(-64, 64), irandom_range(40, 100), 1/40);
+			},
+			40,
+			function(){
+				angle = point_direction(x, y, obj_player.x, obj_player.y);
+			},
+			11,
+			function(){
+				bullet_preset_plate(x, y, 3, 0, 16, 12, angle, function(_x, _y, _dir){
+					bullet_shoot_dir(_x, _y, 4.5, _dir);
+				})
+				if count++ > 4 {
+					count = 0;
+					commandIndex = 0;
+				} else commandIndex--;
+			}
+		]);
+				
+		command_add([
+			4,
+			function(){
+				bullet_preset_ring(choose(-32, WIDTH + 32), irandom_range(60, HEIGHT / 2), 9, 0, random_range(0, 360), function(_x, _y, _dir){
+					with bullet_shoot_dir(_x, _y, 2, _dir) {
+						sprite_index = spr_bullet_small;
+						glow = cb_blue;
+					}
+				});
+				commandIndex--;
+			}
+		])
+	},
+	function(){
+		hp = 320;
+		scoreGive = 200000;
+		movement_start(WIDTH / 2, 110, 1/40);
+		
+		angle = 0;
+		angle2 = 0;
+		angle2_vel = 0;
+				
+		command_set([
+			50,
+			17,
+			function(){
+				bullet_preset_ring(x, y, 16, 0, angle + angle2, function(_x, _y, _dir){
+					bullet_shoot_dir(_x, _y, 2, _dir).sprite_index = spr_bullet_small;
+				});
+				bullet_preset_ring(x, y, 16, 0, -angle + angle2, function(_x, _y, _dir){
+					bullet_shoot_dir(_x, _y, 2, _dir).sprite_index = spr_bullet_small;
+				});
+				angle += global.delta_multi * 3;
+				angle2 += global.delta_multi * angle2_vel;
+				angle2_vel = min(angle2_vel + 0.01 * global.delta_multi, 1)
+				commandIndex--;
+			}
+		]);
+		count = 0;
+		command_timer(120, function(){
+			command_add([
+				70,
+				function(){
+					count = irandom_range(0, 1);
+					bullet_preset_plate(x, y, 25, 6, 32, 0, point_direction(x, y, obj_player.x, obj_player.y), function(_x, _y, _dir){
+						var inst = bullet_shoot_dir2(_x, _y, 11, 0.14, 0.5, _dir);
+						inst.sprite_index = spr_bullet_point;
+						if count++ % 2 == 1 inst.step = method(inst, function(){
+							if y > HEIGHT {
+								dir += 180;
+								y_accel = 0.004;
+								spd += random_range(-0.4, 0.4)
+								step = undefined;
+							}
+						});
+					})
+					commandIndex--;
+				}
+			])
+		})
+	},
+	function(){
+		hp = 100;
+		dir = -1;
+		movement_start(WIDTH / 2, 110, 1/40);
+		command_set([
+			50,
+			40,
+			function(){
+				bullet_group_start(x, y);
+					bullet_preset_poly(x, y, 4, 16, 100, function(_x, _y, _dir) {
+						bullet_shoot(_x, _y);
+					})
+				with bullet_group_end() {
+					dir = other.dir;
+					step = function(){
+						rotate(dir * 0.5 * global.delta_multi)
+						scale(1 + 0.02 * global.delta_multi)
+					}
+				}
+				dir = -dir;
+				commandIndex--;
+			}
+		])
+	},
+]
+
+movement_start(WIDTH / 2, 100, 1/80, , function(){
+	textbox_scene_create([
+		["Hi! :D {pause:32}  \nDo you know the way to the convinience store by any chance?", [spr_playericon, 0, -1]],
+		["[shake:]VROOM VROOOM VROOM", [spr_car, 0, 1]],
+		["[shake:]VROOOOM VROOOM"],
+		["[shake:]VROOOOOOOOOOOOOOOOOOOOOM \nVRUM VRUM VRUM VRUM"],
+		["what", [spr_playericon, 0, -1], func_nextAttack],
+	]);
+});
+
+
+function(){
+				hp = 400;
+				
+				lastX = obj_player.x;
+				lastY = obj_player.y;
+				
+				angle = 0
+				
+				command_set([
+					2,
+					function(){
+						bullet_preset_ring(lastX, lastY, 48, 128, angle, function(_x, _y, _dir){
+							with bullet_shoot_dir2(_x, _y, 2, 1, 16, _dir, 3) {
+								glow = cb_grey
+								sprite_index = spr_bullet_large
+							}
+						});
+						lastX = lerp(lastX, obj_player.x, 1 - power(1 - 0.6, global.delta_milli));
+						lastY = lerp(lastY, obj_player.y - 8, 1 - power(1 - 0.6, global.delta_milli));
+						angle += 360 / 48 / 2;
+						commandIndex--;
+					}
+				]);
+				
+				targetAngle = 0;
+				count = 0;
+				
+				command_add([
+					12,
+					function(){
+						targetAngle = irandom_range(0, 360);
+					},
+					4,
+					function(){
+						bullet_preset_ring(x, y, 32, 0, targetAngle, function(_x, _y, _dir){
+							with bullet_shoot_dir(_x, _y, 4, _dir) {
+								glow = cb_yellow;
+							}
+						})
+						if count++ > 8 {
+							count = 0;
+						} else {
+							commandIndex--;
+						}
+					},
+					function(){
+						movement_start(clamp(obj_player.x + irandom_range(-32, 32), 96, WIDTH - 96), irandom_range(50, 100), 1/12);
+						commandIndex = 0;
+					},
+				]);
+				
+				command_add([
+					12,
+					function(){
+						bullet_preset_ring(x, y, 64, 0, irandom_range(0, 360), function(_x, _y, _dir){
+							with bullet_shoot_dir(_x, _y, 3, _dir) {
+								glow = cb_green;
+								sprite_index = spr_bullet_small
+							}
+						})
+						commandIndex--;
+					}
+				])
+			}
+
+
+function(){
+				hp = 100
+				scoreGive = 100
+				pointGive = 2
+				
+				b_color = true
+				
+				command_set([
+					50,
+					function(){
+						b_color = !b_color
+						bullet_preset_ring(x, y, 18, 0, wave(-720, 720, 12), function(_x, _y, _dir){
+							bullet_group_start(_x, _y);
+							bullet_preset_ring(_x, _y, 6, 48, irandom_range(0, 360), function(_x, _y, _dir){
+								bullet_shoot(_x, _y).glow = b_color ? cb_blue : cb_yellow;
+							})
+							with bullet_group_end() {
+								dir = _dir;
+								spd = 6;
+								spd_accel = 0.1
+								spd_target = 2
+								b_rotateVel = choose(-1, 1) * random_range(0.5, 1.5)
+								step = function(){
+									rotate(global.delta_multi * b_rotateVel)
+								}
+							}
+						})
+						commandIndex--
+					}
+				])
+			},
+
+
+function(){
+	hp = 60;
+	scoreGive = 10000
+	pointGive = 8
+				
+	b_amount = 9;
+	b_dir = 0;
+	b_turn = 1;
+				
+	command_set([
+		6,
+		function(){
+			bullet_preset_ring(x, y, b_amount, 0, b_dir, function(_x, _y, _dir){
+				with bullet_shoot_dir2(x, y, 10, 0.5, 4, _dir, 4) {
+					glow = cb_blue;
+					dir_target = dir + 90
+					dir_accel = other.b_turn / 5 * 2;
+				}
+			})
+			var _d = wave(-5, 5, 15);
+			b_turn = _d;
+			b_dir += _d;
+						
+			commandIndex--;
+		}
+	])
+},
