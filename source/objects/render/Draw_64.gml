@@ -4,22 +4,24 @@ var winHeight = game_window_get_height();
 var gameSurfaceX = x;
 var gameSurfaceY = y;
 
+var _scale = scale;
+
 // game ui
 
 if global.gameActive {
 	
 	draw_set_color(c_white)
 
-	draw_rectangle(gameSurfaceX-1, gameSurfaceY-1, gameSurfaceX+WIDTH + 2, gameSurfaceY+HEIGHT + 2, 1)
+	draw_rectangle(gameSurfaceX-1, gameSurfaceY-1, gameSurfaceX+WIDTH*_scale + 2, gameSurfaceY+HEIGHT*_scale + 2, 1)
 
 	draw_set_halign(fa_right)
 	
 		draw_set_font(ft_ui)
-			draw_text(gameSurfaceX - 8, gameSurfaceY + 2, "Score")
+			draw_text_transformed(gameSurfaceX - 8, gameSurfaceY + 2, "Score", _scale, _scale, 0);
 		draw_set_font(ft_score)
-			draw_text(gameSurfaceX - 8, gameSurfaceY + 2 + 24 * 1, string(round(scoreAnim)))//string(global.score))
+			draw_text_transformed(gameSurfaceX - 8, gameSurfaceY + 2 + 24 * 1 * _scale, string(round(scoreAnim)), _scale, _scale, 0)//string(global.score))
 		draw_set_font(ft_ui)
-			draw_text_transformed(gameSurfaceX - 8, gameSurfaceY + 2 + 24 * 2.25, string(global.highscore), 0.75, 0.75, 0)
+			draw_text_transformed(gameSurfaceX - 8, gameSurfaceY + 2 + 24 * 2.25 * _scale, string(global.highscore), 0.75 * _scale, 0.75 * _scale, 0)
 		
 		draw_set_font(ft_debug)
 
@@ -27,7 +29,7 @@ if global.gameActive {
 	
 	if (instance_exists(obj_player)) {
 		for (var i = 0; i < obj_player.livesLeft; i++) {
-			draw_sprite(spr_playericon, 0, gameSurfaceX-24, gameSurfaceY + HEIGHT - i*18 - 18)
+			draw_sprite_ext(spr_playericon, 0, gameSurfaceX-24*_scale, gameSurfaceY + HEIGHT*_scale - i*18*_scale - 18, _scale, _scale, 0, c_white, 1);
 		}
 	}
 
@@ -37,15 +39,15 @@ if global.gameActive {
 		if y < 0 {
 			dist = 0 - y;
 		
-			draw_sprite_ext(spr_warning, 0, gameSurfaceX+x, gameSurfaceY+0, 1, 1, 0, c_white, 1 - dist/96)
+			draw_sprite_ext(spr_warning, 0, gameSurfaceX+x*_scale, gameSurfaceY+0, 1, 1, 0, c_white, 1 - dist/96)
 		} else {
 			if x < 0 {
 				dist = 0 - x;
-				draw_sprite_ext(spr_warning, 0, gameSurfaceX+0, gameSurfaceY+y, 1, 1, 0, c_white, 1 - dist/96)
+				draw_sprite_ext(spr_warning, 0, gameSurfaceX+0, gameSurfaceY+y*_scale, 1, 1, 0, c_white, 1 - dist/96)
 			}
 			if x > WIDTH {
 				dist = x - WIDTH;
-				draw_sprite_ext(spr_warning, 0, gameSurfaceX+WIDTH, gameSurfaceY+y, 1, 1, 0, c_white, 1 - dist/96)
+				draw_sprite_ext(spr_warning, 0, gameSurfaceX+WIDTH*_scale, gameSurfaceY+y*_scale, 1, 1, 0, c_white, 1 - dist/96)
 			}
 		}
 		var xP = importantAnim.value;
@@ -53,7 +55,7 @@ if global.gameActive {
 			
 			if 0 < xP && xP < WIDTH {
 				if instance_exists(obj_player) {
-					draw_line(gameSurfaceX+obj_player.x, gameSurfaceY+HEIGHT + 16, gameSurfaceX+xP, gameSurfaceY+HEIGHT + 16)
+					draw_line(gameSurfaceX+obj_player.x*_scale, gameSurfaceY+HEIGHT*_scale + 16*_scale, gameSurfaceX+xP*_scale, gameSurfaceY+HEIGHT*_scale + 16*_scale)
 				}
 				
 				var _timeVal = 0;
@@ -67,28 +69,28 @@ if global.gameActive {
 				}
 				
 				
-				draw_sprite_ext(spr_enemyindicatorback, 0, round(gameSurfaceX+xP), gameSurfaceY+HEIGHT + 16, 1, 1, 0, c_white, 1);
+				draw_sprite_ext(spr_enemyindicatorback, 0, round(gameSurfaceX+xP*_scale), gameSurfaceY+HEIGHT*_scale + 16*_scale, _scale, _scale, 0, c_white, 1);
 				if _timeVal != 0
-				draw_sprite_ext(spr_enemyindicator, 1, round(gameSurfaceX+xP), gameSurfaceY+HEIGHT + 16, _timeVal, _timeVal, 0, c_white, 1);
+				draw_sprite_ext(spr_enemyindicator, 1, round(gameSurfaceX+xP*_scale), gameSurfaceY+HEIGHT*_scale + 16*_scale, _timeVal*_scale, _timeVal*_scale, 0, c_white, 1);
 				
-				draw_sprite_ext(spr_enemyindicator, 0, round(gameSurfaceX+xP), gameSurfaceY+HEIGHT + 16, 1-hp/maxhp, 1-hp / maxhp, 0, c_white, 1);
+				draw_sprite_ext(spr_enemyindicator, 0, round(gameSurfaceX+xP*_scale), gameSurfaceY+HEIGHT*_scale + 16*_scale, (1-hp/maxhp)*_scale, (1-hp / maxhp)*_scale, 0, c_white, 1);
 				if _timeVal != 0
-				draw_sprite_ext(spr_enemyindicator, 0, round(gameSurfaceX+xP), gameSurfaceY+HEIGHT + 16, min(_timeVal, 1-hp/maxhp), min(_timeVal, 1-hp / maxhp), 0, merge_color(c_black, c_fuchsia, 0.2), 0.7);
+				draw_sprite_ext(spr_enemyindicator, 0, round(gameSurfaceX+xP*_scale), gameSurfaceY+HEIGHT*_scale + 16*_scale, min(_timeVal, 1-hp/maxhp)*_scale, min(_timeVal, 1-hp / maxhp)*_scale, 0, merge_color(c_black, c_fuchsia, 0.2), 0.7);
 			}
 		} else if important == 2 {
 			if 0 < xP && xP < WIDTH {
-				draw_sprite_ext(spr_importantindicator, 0, round(gameSurfaceX+xP), gameSurfaceY+HEIGHT + 16, 1, 1, 0, c_white, 1)
-				draw_sprite_ext(spr_importantindicator, 0, round(gameSurfaceX+xP), gameSurfaceY+HEIGHT + 16, 1-hp/maxhp, 1-hp / maxhp, 0, merge_color(c_black, c_fuchsia, 0.2), 0.7)
+				draw_sprite_ext(spr_importantindicator, 0, round(gameSurfaceX+xP*_scale), gameSurfaceY+HEIGHT + 16*_scale, _scale, _scale, 0, c_white, 1)
+				draw_sprite_ext(spr_importantindicator, 0, round(gameSurfaceX+xP*_scale), gameSurfaceY+HEIGHT + 16*_scale, (1-hp/maxhp)*_scale, (1-hp / maxhp)*_scale, 0, merge_color(c_black, c_fuchsia, 0.2), 0.7)
 			}
 		} else {
 			if 0 < xP && xP < WIDTH {
-				draw_sprite_ext(spr_normalenemyindicator, 0, round(gameSurfaceX+xP), gameSurfaceY+HEIGHT + 16, 1, 1, 0, c_white, 1)
-				draw_sprite_ext(spr_normalenemyindicator, 1, round(gameSurfaceX+xP), gameSurfaceY+HEIGHT + 16, 1-hp/maxhp, 1-hp / maxhp, 0,c_white, 1)
+				draw_sprite_ext(spr_normalenemyindicator, 0, round(gameSurfaceX+xP*_scale), gameSurfaceY+HEIGHT*_scale + 16*_scale, _scale, _scale, 0, c_white, 1)
+				draw_sprite_ext(spr_normalenemyindicator, 1, round(gameSurfaceX+xP*_scale), gameSurfaceY+HEIGHT*_scale + 16*_scale, (1-hp/maxhp)*_scale, (1-hp / maxhp)*_scale, 0,c_white, 1)
 			}
 		}
 	}
 	with obj_player
-		draw_sprite_ext(spr_playertargeticon, 0, round(gameSurfaceX+hook_icon_xAnim.value), gameSurfaceY + HEIGHT + 16, hook_icon_showAnim.value, hook_icon_showAnim.value, hook_icon_rotate, c_white, 1);
+		draw_sprite_ext(spr_playertargeticon, 0, round(gameSurfaceX+hook_icon_xAnim.value*_scale), gameSurfaceY + HEIGHT*other.scale + 16*_scale, hook_icon_showAnim.value*_scale, hook_icon_showAnim.value*_scale, hook_icon_rotate, c_white, 1);
 
 } else {
 	
