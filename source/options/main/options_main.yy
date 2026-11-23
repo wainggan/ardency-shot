@@ -1,6 +1,11 @@
 {
   "$GMMainOptions":"v5",
   "%Name":"Main",
+  "ConfigValues":{
+    "Debug":{
+      "option_author":"parchment",
+    },
+  },
   "name":"Main",
   "option_allow_instance_change":true,
   "option_audio_error_behaviour":true,

@@ -4,6 +4,12 @@
   "ConfigValues":{
     "Debug":{
       "option_windows_resize_window":"true",
+      "option_windows_description_info":"Bullet hell",
+      "option_windows_copyright_info":"parchment",
+      "option_windows_product_info":"Ardency Shot",
+      "option_windows_company_info":"parchment",
+      "option_windows_executable_name":"ardency-shot.exe",
+      "option_windows_display_name":"Ardency: Shot",
     },
   },
   "name":"Windows",

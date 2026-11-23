@@ -3,7 +3,7 @@
   "%Name":"operagx",
   "ConfigValues":{
     "Debug":{
-      "option_operagx_game_name":"Pain",
+      "option_operagx_game_name":"Ardency: Shot",
       "option_operagx_mod_game_name":"skylightsgame",
       "option_operagx_scale":"1",
     },
