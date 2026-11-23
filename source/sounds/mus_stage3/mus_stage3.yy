@@ -10,7 +10,7 @@
   "compression":3,
   "compressionQuality":3,
   "conversionMode":0,
-  "duration":189.231,
+  "duration":189.23102,
   "exportDir":"",
   "name":"mus_stage3",
   "parent":{
