@@ -1,6 +1,12 @@
 {
   "$GMLinuxOptions":"",
   "%Name":"Linux",
+  "ConfigValues":{
+    "Debug":{
+      "option_linux_interpolate_pixels":"false",
+      "option_linux_resize_window":"true",
+    },
+  },
   "name":"Linux",
   "option_linux_allow_fullscreen":false,
   "option_linux_disable_sandbox":false,

@@ -1,6 +1,13 @@
 {
   "$GMOperaGXOptions":"v1",
   "%Name":"operagx",
+  "ConfigValues":{
+    "Debug":{
+      "option_operagx_game_name":"Pain",
+      "option_operagx_mod_game_name":"skylightsgame",
+      "option_operagx_scale":"1",
+    },
+  },
   "name":"operagx",
   "option_operagx_display_cursor":true,
   "option_operagx_editUrl":"",

@@ -161,6 +161,7 @@
     {"id":{"name":"scr_player","path":"scripts/scr_player/scr_player.yy",},},
     {"id":{"name":"scr_primitivedrawing","path":"scripts/scr_primitivedrawing/scr_primitivedrawing.yy",},},
     {"id":{"name":"scr_random","path":"scripts/scr_random/scr_random.yy",},},
+    {"id":{"name":"scr_render","path":"scripts/scr_render/scr_render.yy",},},
     {"id":{"name":"scr_ropes","path":"scripts/scr_ropes/scr_ropes.yy",},},
     {"id":{"name":"scr_sod","path":"scripts/scr_sod/scr_sod.yy",},},
     {"id":{"name":"scr_sounds","path":"scripts/scr_sounds/scr_sounds.yy",},},

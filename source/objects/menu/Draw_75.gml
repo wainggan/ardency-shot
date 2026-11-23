@@ -1,5 +1,5 @@
-var winWidth = window_get_width();
-var winHeight = window_get_height();
+var winWidth = game_window_get_width();
+var winHeight = game_window_get_height();
 
 // TODO: fix
 

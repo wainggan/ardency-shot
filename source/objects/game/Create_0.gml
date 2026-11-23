@@ -38,7 +38,7 @@ global.shotSound = false;
 
 testSlowDown = 0
 
-var gameSurfaceX = (window_get_width()/2-WIDTH/2)+WIDTH/8;
+var gameSurfaceX = (game_window_get_width()/2-WIDTH/2)+WIDTH/8;
 var gameSurfaceY = 16
 
 global.file = undefined;
