@@ -5,8 +5,15 @@ var winHeight = window_get_height();
 
 if input.check("sneak") exit
 
-if controller.get_active() {
-	draw_rectangle_sprite(0, 0, winWidth, winHeight, false, c_black, 0.6)
+if global.gameActive {
+	if controller.get_active() {
+		draw_rectangle_sprite(0, 0, winWidth, winHeight, false, c_black, 0.6)
+	}
+}
+else {
+	if controller.get_active() {
+		draw_rectangle_sprite(0, 0, 400, winHeight, false, c_black, 0.6)
+	}
 }
 
 controller.draw()

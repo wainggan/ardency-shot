@@ -1,9 +1,9 @@
 {
   "FolderOrderSettings":[
     {"name":"bosses","order":1,"path":"folders/graphics/gameplay/bosses.yy",},
-    {"name":"ui","order":15,"path":"folders/graphics/ui.yy",},
     {"name":"particles","order":14,"path":"folders/graphics/particles.yy",},
     {"name":"blend","order":16,"path":"folders/graphics/shaders/blend.yy",},
+    {"name":"ui","order":15,"path":"folders/graphics/ui.yy",},
     {"name":"other","order":5,"path":"folders/objects/bullet/other.yy",},
     {"name":"parent","order":4,"path":"folders/objects/bullet/parent.yy",},
   ],

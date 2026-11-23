@@ -34,3 +34,5 @@ if global.score > global.highscore {
 
 global.shotSound = false;
 //show_debug_message(global.delta_multi)
+
+mainmenu_anim = approach(mainmenu_anim, 1, 0.05 * global.delta_multi);

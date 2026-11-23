@@ -18,6 +18,13 @@ hasBeat = false;
 
 
 meta = {
+	mus_title: method(self, function () {
+		bpm = 136;
+		
+		introLength = 0;
+		loopLength =  0;
+		totalLength = 64.242;
+	}),
 	mus_stage1test: method(self, function(){
 		introLength = 3.07;
 		loopLength = (60 + 41.53) - introLength;

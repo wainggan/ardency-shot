@@ -17,6 +17,8 @@ global.pause = 0;
 pause = 0;
 musicPause = false;
 
+mainmenu_anim = 0;
+
 global.time = 0;
 
 game.textboxes_onEnd = function(){};

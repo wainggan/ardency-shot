@@ -112,7 +112,10 @@ function Page_Menu() : Page() constructor {
 			controller.next()
 		}
 
-		game_pause(2, true);
+		if global.gameActive {
+			game_pause(2, true);
+		}
+		
 		scroll(input.check_stutter("down", 12, 4) - input.check_stutter("up", 12, 4))
 		change(input.check_stutter("right", 12, 3) - input.check_stutter("left", 12, 3))
 		if input.check_pressed("shoot") {
