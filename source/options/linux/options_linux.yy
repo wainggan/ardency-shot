@@ -5,6 +5,10 @@
     "Debug":{
       "option_linux_interpolate_pixels":"false",
       "option_linux_resize_window":"true",
+      "option_linux_short_desc":"Bullet hell game",
+      "option_linux_homepage":"https://parchii.neocities.org/",
+      "option_linux_maintainer_email":"parchii@waifu.club",
+      "option_linux_display_name":"Ardency: Shot",
     },
   },
   "name":"Linux",
